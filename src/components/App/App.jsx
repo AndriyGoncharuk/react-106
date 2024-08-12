@@ -1,10 +1,11 @@
+import { FaBeer } from "react-icons/fa";
+import { BiArchive } from "react-icons/bi";
 import Header from "../Header/Header";
 import PilotList from "../PilotList/PilotList";
 import officers from "../../officers.json";
 import defaultImg from "../../assets/default-pilot.jpeg";
 import css from "./App.module.css";
-import { FaBeer } from "react-icons/fa";
-import { BiArchive } from "react-icons/bi";
+
 // import AtomIcon from "../../assets/atom.svg";
 
 const PSection = ({ title, children }) => {
@@ -46,6 +47,14 @@ const ExpRating = () => {
   );
 };
 
+const Button = ({ type, children }) => {
+  return (
+    <button className="myClass" type={type}>
+      {children}
+    </button>
+  );
+};
+
 export default function App() {
   return (
     <div className={css.container}>
@@ -62,6 +71,9 @@ export default function App() {
       <PSection title="What are these experience points and levels?">
         <ExpRating />
       </PSection>
+
+      <Button type="button">Btn 1</Button>
+      <Button type="submit">Btn 2</Button>
     </div>
   );
 }
