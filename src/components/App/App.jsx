@@ -1,23 +1,36 @@
-// import { useState } from "react";
-// import ClickTracker from "../ClickTracker/ClickTracker";
-// import Sidebar from "../Sidebar/Sidebar";
-// import Timer from "../Timer";
-// import articles from "../../articles.json";
+import { useState, useEffect } from "react";
+import ClickTracker from "../ClickTracker";
+import Sidebar from "../Sidebar/Sidebar";
+import Reader from "../Reader/Reader";
+import articles from "../../articles.json";
+// import getRandomHexColor from "../../utils/getRandomHexColor";
 import css from "./App.module.css";
 
 export default function App() {
-  // const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const openSidebar = () => setIsSidebarOpen(true);
+
+  const closeSidebar = () => setIsSidebarOpen(false);
+
+  const [clicks, setClicks] = useState(0);
+  const color = clicks % 5 === 0 ? "orangered" : "skyblue";
+
+  useEffect(() => {
+    document.body.style.backgroundColor = color;
+  }, [color]);
 
   return (
     <div className={css.container}>
       <h1>Effects in React</h1>
+      <button onClick={() => setClicks(clicks + 1)}>Clicks {clicks}</button>
 
-      {/* <ClickTracker /> */}
+      <ClickTracker />
 
-      {/* <button>Open sidebar</button>
-      {isSidebarOpen && <Sidebar />} */}
+      <button onClick={openSidebar}>Open sidebar</button>
+      {isSidebarOpen && <Sidebar onClose={closeSidebar} />}
 
-      {/* <Timer /> */}
+      <Reader items={articles} />
     </div>
   );
 }

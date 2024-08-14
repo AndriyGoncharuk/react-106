@@ -5,12 +5,39 @@
  * - Очистити слухач при розмонтуванні
  */
 
+// mount > unmount > mount
+// mount > effect > addListener > unmount > mount > effect > addListener
+// 2 addListener
+
+import { useEffect } from "react";
 import css from "./Sidebar.module.css";
 
-export default function Sidebar() {
+export default function Sidebar({ onClose }) {
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.code === "Escape") {
+        onClose();
+      }
+    };
+
+    document.addEventListener("keydown", handleEsc);
+
+    return () => {
+      document.removeEventListener("keydown", handleEsc);
+    };
+  }, [onClose]);
+
+  // useEffect(() => {
+  //   console.log("mount");
+
+  //   return () => {
+  //     console.log("cleanup");
+  //   };
+  // }, []);
+
   return (
     <div className={css.wrapper}>
-      <button>Close</button>
+      <button onClick={onClose}>Close</button>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
         voluptatum culpa modi? Quaerat repellat sit error officia dolore?
