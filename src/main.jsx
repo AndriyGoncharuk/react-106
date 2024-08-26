@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./components/App";
+// import GitHubApp from "./components/GitHubApp/GitHubApp";
+import App from "./components/App/App";
 import "modern-normalize";
 import "./index.css";
 
